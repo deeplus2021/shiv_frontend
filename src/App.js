@@ -1,5 +1,5 @@
 import React, { createRef } from 'react'
-import { Routes ,Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import {
   Container,
   Dimmer,
@@ -23,6 +23,7 @@ import NodeInfo from './NodeInfo'
 import TemplateModule from './TemplateModule'
 import Transfer from './Transfer'
 import Upgrade from './Upgrade'
+import AddProfile from './components/AddProfile'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -56,16 +57,13 @@ function Main() {
     )
   }
 
-  const contextRef = createRef()
-
   return (
-    <div ref={contextRef}>
-      <Sticky context={contextRef}>
-        <AccountSelector />
-      </Sticky>    
+    <div>
       <Routes>
-        <Route path="/" element={<SubstrateTemplate/>} />
-      </Routes>  
+        <Route path="/" element={<SubstrateTemplate />} />
+        {/* <Route path="/addprofile" */}
+        <Route path="/addprofile" element={<AddProfile />} />
+      </Routes>
     </div>
   )
 }
@@ -79,33 +77,39 @@ export default function App() {
 }
 
 function SubstrateTemplate() {
+  const contextRef = createRef()
   return (
     <React.Fragment>
-      <Container>
-        <Grid stackable columns="equal">
-          <Grid.Row stretched>
-            <NodeInfo />
-            <Metadata />
-            <BlockNumber />
-            <BlockNumber finalized />
-          </Grid.Row>
-          <Grid.Row stretched>
-            <Balances />
-          </Grid.Row>
-          <Grid.Row>
-            <Transfer />
-            <Upgrade />
-          </Grid.Row>
-          <Grid.Row>
-            <Interactor />
-            <Events />
-          </Grid.Row>
-          <Grid.Row>
-            <TemplateModule />
-          </Grid.Row>
-        </Grid>
-      </Container>
-      <DeveloperConsole />
+      <div ref={contextRef}>
+        <Sticky context={contextRef}>
+          <AccountSelector />
+        </Sticky>
+        <Container>
+          <Grid stackable columns="equal">
+            <Grid.Row stretched>
+              <NodeInfo />
+              <Metadata />
+              <BlockNumber />
+              <BlockNumber finalized />
+            </Grid.Row>
+            <Grid.Row stretched>
+              <Balances />
+            </Grid.Row>
+            <Grid.Row>
+              <Transfer />
+              <Upgrade />
+            </Grid.Row>
+            <Grid.Row>
+              <Interactor />
+              <Events />
+            </Grid.Row>
+            <Grid.Row>
+              <TemplateModule />
+            </Grid.Row>
+          </Grid>
+        </Container>
+        <DeveloperConsole />
+      </div>
     </React.Fragment>
   )
 }
