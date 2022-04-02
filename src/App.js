@@ -56,9 +56,12 @@ function Main() {
       "Loading accounts (please review any extension's authorization)"
     )
   }
-
+  const contextRef = createRef()
   return (
-    <div>
+    <div ref={contextRef}>
+        <Sticky context={contextRef}>
+          <AccountSelector />
+        </Sticky>
       <Routes>
         <Route path="/" element={<SubstrateTemplate />} />
         {/* <Route path="/addprofile" */}
@@ -77,13 +80,9 @@ export default function App() {
 }
 
 function SubstrateTemplate() {
-  const contextRef = createRef()
   return (
     <React.Fragment>
-      <div ref={contextRef}>
-        <Sticky context={contextRef}>
-          <AccountSelector />
-        </Sticky>
+      <div >
         <Container>
           <Grid stackable columns="equal">
             <Grid.Row stretched>
