@@ -24,6 +24,7 @@ import TemplateModule from './TemplateModule'
 import Transfer from './Transfer'
 import Upgrade from './Upgrade'
 import AddProfile from './components/AddProfile'
+import AccountSelectorPage from './AccountSelectorPage'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -56,18 +57,12 @@ function Main() {
       "Loading accounts (please review any extension's authorization)"
     )
   }
-  const contextRef = createRef()
   return (
-    <div ref={contextRef}>
-        <Sticky context={contextRef}>
-          <AccountSelector />
-        </Sticky>
       <Routes>
         <Route path="/" element={<SubstrateTemplate />} />
         {/* <Route path="/addprofile" */}
         <Route path="/addprofile" element={<AddProfile />} />
       </Routes>
-    </div>
   )
 }
 
@@ -80,9 +75,13 @@ export default function App() {
 }
 
 function SubstrateTemplate() {
+  const contextRef = createRef()
   return (
     <React.Fragment>
-      <div >
+      <div  ref={contextRef} >
+      <Sticky context={contextRef}>
+          <AccountSelector/>
+        </Sticky>
         <Container>
           <Grid stackable columns="equal">
             <Grid.Row stretched>
