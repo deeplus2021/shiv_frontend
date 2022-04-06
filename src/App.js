@@ -24,7 +24,6 @@ import TemplateModule from './TemplateModule'
 import Transfer from './Transfer'
 import Upgrade from './Upgrade'
 import AddProfile from './components/AddProfile'
-import AccountSelectorPage from './AccountSelectorPage'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import PersonIcon from '@mui/icons-material/Person'
 
 import {
   Menu,
@@ -49,43 +49,41 @@ function Main(props) {
     setCurrentAccount(keyring.getPair(addr))
   }
 
+
   return (
-        <Menu.Menu>
-          {!currentAccount ? (
-            <span>
-              Create an account with Polkadot-JS Extension (
-              <a target="_blank" rel="noreferrer" href={CHROME_EXT_URL}>
-                Chrome
-              </a>
-              ,&nbsp;
-              <a target="_blank" rel="noreferrer" href={FIREFOX_ADDON_URL}>
-                Firefox
-              </a>
-              )&nbsp;
-            </span>
-          ) : null}
-          <CopyToClipboard text={acctAddr(currentAccount)}>
-            <Button
-              basic
-              circular
-              size="large"
-              icon="user"
-              color={currentAccount ? 'green' : 'red'}
-            />
-          </CopyToClipboard>
-          <Dropdown
-            search
-            selection
-            clearable
-            placeholder="Select an account"
-            options={keyringOptions}
-            onChange={(_, dropdown) => {
-              onChange(dropdown.value)
-            }}
-            value={acctAddr(currentAccount)}
-          />
-          <BalanceAnnotation />
+    <React.Fragment>
+      <Menu.Menu style={{ alignItems: 'center' }}>
+      <PersonIcon color="success" style={{ fontSize: 45}}/>
         </Menu.Menu>
+      <Menu.Menu position="right" style={{ alignItems: 'center' }}>
+     
+        {!currentAccount ? (
+          <span>
+            Create an account with Polkadot-JS Extension (
+            <a target="_blank" rel="noreferrer" href={CHROME_EXT_URL}>
+              Chrome
+            </a>
+            ,&nbsp;
+            <a target="_blank" rel="noreferrer" href={FIREFOX_ADDON_URL}>
+              Firefox
+            </a>
+            )&nbsp;
+          </span>
+        ) : null}
+        <Dropdown
+          search
+          selection
+          clearable
+          placeholder="Select an account"
+          options={keyringOptions}
+          onChange={(_, dropdown) => {
+            onChange(dropdown.value)
+          }}
+          value={acctAddr(currentAccount)}
+        />
+        <BalanceAnnotation />
+      </Menu.Menu>
+    </React.Fragment>
   )
 }
 
@@ -117,7 +115,7 @@ function BalanceAnnotation(props) {
   ) : null
 }
 
-export default function AccountSelectorPage(props) {
+export default function AccountSelectorDesktop(props) {
   const { api, keyring } = useSubstrateState()
   return keyring.getPairs && api.query ? <Main {...props} /> : null
 }
