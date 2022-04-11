@@ -23,7 +23,9 @@ import NodeInfo from './NodeInfo'
 import TemplateModule from './TemplateModule'
 import Transfer from './Transfer'
 import Upgrade from './Upgrade'
-import AddProfile from './components/AddProfile'
+import AddProfile from './components/profile/AddProfile'
+import UploadProfileVideo from './components/profile/UploadProfileVideo'
+import ApiQuery from './components/profile/ApiQuery';
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -61,6 +63,8 @@ function Main() {
         <Route path="/" element={<SubstrateTemplate />} />
         {/* <Route path="/addprofile" */}
         <Route path="/addprofile" element={<AddProfile />} />
+        <Route path="/uploadvideo" element={<UploadProfileVideo/>} />
+        <Route path="/apiquery" element={<ApiQuery/>} />
       </Routes>
   )
 }

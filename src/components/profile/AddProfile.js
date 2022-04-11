@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useSubstrateState } from './../substrate-lib'
+import { useSubstrateState } from './../../substrate-lib'
 import { web3FromSource } from '@polkadot/extension-dapp'
 import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { useHistory, useParams } from 'react-router-dom'
-import { FocusError, SubmittingWheel } from './../commons/FocusWheel'
+import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
 import Container from '@mui/material/Container'
-import ResponsiveAppBar from './ResponsiveAppBar'
+import ResponsiveAppBar from './../ResponsiveAppBar'
 
 function AddProfile(props) {
   const { api, currentAccount } = useSubstrateState()
