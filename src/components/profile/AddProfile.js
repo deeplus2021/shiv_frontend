@@ -1,25 +1,60 @@
 import React, { useEffect, useState } from 'react'
 import { useSubstrateState } from './../../substrate-lib'
 import { web3FromSource } from '@polkadot/extension-dapp'
+import ipfs from '../../commons/ipfs'
 import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
 import Container from '@mui/material/Container'
 import ResponsiveAppBar from './../ResponsiveAppBar'
+import UploadProfileVideo from './UploadProfileVideo'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 function AddProfile(props) {
   const { api, currentAccount } = useSubstrateState()
 
+  let modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image', 'video'],
+      ['clean'],
+    ],
+  }
+
+  let formats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'video',
+  ]
+
   // The transaction submission status
   const [status, setStatus] = useState('')
-  const [unsub, setUnsub] = useState(null)
+  const [unsubValue, setUnsub] = useState(null)
   const [eventstatus, setEventStatus] = useState()
 
   // The currently stored value
   const [currentValue, setCurrentValue] = useState(0)
   const [formValue, setFormValue] = useState(0)
   const [errorThrow, setErrorThrow] = useState(false)
+  let navigate = useNavigate()
 
   const getFromAcct = async () => {
     const {
@@ -35,76 +70,70 @@ function AddProfile(props) {
     return [address, { signer: injector.signer }]
   }
 
-  const txResHandler = (status, events, setSubmitting) => {
+  const txResHandler = (status, events, dispatchError, setSubmitting) => {
     setSubmitting(true)
-    if (status.isFinalized) {
+    if (dispatchError) {
+      if (dispatchError.isModule) {
+        // for module errors, we have the section indexed, lookup
+        const decoded = api.registry.findMetaError(dispatchError.asModule)
+        const { docs, name, section } = decoded
+
+        console.log(`${section}.${name}: ${docs.join(' ')}`)
+        setEventStatus(name)
+        setSubmitting(false)
+      }
+    } else if (status.isFinalized) {
       setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
+      console.log('eventstatus', eventstatus)
+
+      navigate('/')
+
       setSubmitting(false)
-    } else setStatus(`Current transaction status: ${status.type}`)
-    setEventStatus('')
-
-    if (status.isInBlock || status.isFinalized) {
-      events
-        // find/filter for failed events
-        .filter(({ event }) => api.events.system.ExtrinsicFailed.is(event))
-        // we know that data for system.ExtrinsicFailed is
-        // (DispatchError, DispatchInfo)
-        .forEach(
-          ({
-            event: {
-              data: [error, info],
-            },
-          }) => {
-            if (error.isModule) {
-              // for module errors, we have the section indexed, lookup
-              const decoded = api.registry.findMetaError(error.asModule)
-              const { documentation, method, section } = decoded
-
-              // console.log(`${section}.${method}: ${documentation.join(' ')}`)
-              setEventStatus(method)
-            } else {
-              // Other, CannotLookup, BadOrigin, no extra info
-              console.log(error.toString())
-              setEventStatus(error.toString())
-            }
-          }
-        )
     }
   }
 
   const txErrHandler = err =>
     setStatus(`😞 Transaction Failed: ${err.toString()}`)
 
-  const signedTx = async () => {
-    const fromAcct = await getFromAcct()
-    // transformed can be empty parameters
-    const opts = []
-    const txExecute = api.tx.templateModule.addCitizen(...opts)
+  // const signedTx = async () => {
+  //   const fromAcct = await getFromAcct()
+  //   // transformed can be empty parameters
+  //   const opts = []
+  //   const txExecute = api.tx.templateModule.addCitizen(...opts)
 
-    const unsub = await txExecute
-      .signAndSend(...fromAcct, txResHandler)
-      .catch(txErrHandler)
+  //   const unsub = await txExecute
+  //     .signAndSend(...fromAcct, txResHandler)
+  //     .catch(txErrHandler)
 
-    setUnsub(() => unsub)
-  }
+  //   setUnsub(() => unsub)
+
+  // }
 
   return (
     <React.Fragment>
-      <ResponsiveAppBar/>
+      <ResponsiveAppBar />
       <Container maxWidth="xl">
         <Formik
           initialValues={{
-            ipfshash: '',
+            name: '',
+            details: '',
+            video: '',
           }}
           validationSchema={Yup.object().shape({
-            ipfshash: Yup.string().required('ipfshash is required'),
+            name: Yup.string().required('name is required'),
+            details: Yup.string().required('Details is required'),
+            video: Yup.string().required('Video is required'),
           })}
           onSubmit={async (values, actions) => {
             try {
+              const file = await ipfs.add({
+                path: 'profile.json',
+                content: JSON.stringify(values),
+              })
               const fromAcct = await getFromAcct()
               //   values.countvariable = count
               //   const data = await nearvar.contract. ...
-              const opts = [values.ipfshash]
+              const opts = [file.cid.toString()]
 
               // const opts = ['Education', 'Bhadrak', 'whatapp']
 
@@ -113,17 +142,21 @@ function AddProfile(props) {
               setStatus('Sending...')
 
               const unsub = await txExecute
-                .signAndSend(...fromAcct, ({ status, events }) => {
-                  txResHandler(status, events, actions.setSubmitting)
-                })
+                .signAndSend(
+                  ...fromAcct,
+                  ({ status, events, dispatchError }) => {
+                    txResHandler(
+                      status,
+                      events,
+                      dispatchError,
+                      actions.setSubmitting
+                    )
+                  }
+                )
                 .catch(txErrHandler)
 
               setUnsub(() => unsub)
 
-              //   await transaction(opts)
-
-              // console.log(data)
-              // history.push(`/thankyou${data.mutationoutputname}`)
               // history.goBack()
             } catch (e) {
               console.error(e)
@@ -149,14 +182,42 @@ function AddProfile(props) {
               {errorThrow && <p>error: {errorThrow}</p>}
 
               <div className="form-group">
-                <label htmlFor="ipfshash">ipfshash</label>
-                {touched.ipfshash && errors.ipfshash && (
-                  <p className="alert alert-danger">{errors.ipfshash}</p>
+                <label htmlFor="name">Name</label>
+                {touched.name && errors.name && (
+                  <p className="alert alert-danger">{errors.name}</p>
                 )}
 
-                <Field name="ipfshash" className="form-control" />
+                <Field name="name" className="form-control" />
               </div>
 
+              <div className="form-group">
+                <label htmlFor="details">Details</label>
+                {touched.details && errors.details && (
+                  <p className="alert alert-danger">{errors.details}</p>
+                )}
+
+                <Field id="details" name="details" className="form-control">
+                  {({ field }) => (
+                    <ReactQuill
+                      value={field.value}
+                      onChange={field.onChange(field.name)}
+                      modules={modules}
+                      formats={formats}
+                      // modules={CreateProduct.modules}
+                    />
+                  )}
+                </Field>
+              </div>
+              <div className="form-group">
+                <label htmlFor="Video">Video</label>
+                {touched.video && errors.video && (
+                  <p className="alert alert-danger">{errors.video}</p>
+                )}
+                <UploadProfileVideo
+                  name={'video'}
+                  setFieldValue={setFieldValue}
+                />
+              </div>
               <div className="text-center">
                 <button
                   type="submit"

@@ -9,13 +9,13 @@ const sigHex = '0x' + Buffer.from(sig).toString('hex');
 const authHeader = Buffer.from(`sub-${pair.address}:${sigHex}`).toString('base64');
 const ipfsGateway = 'https://crustwebsites.net';
 
-const ipfs = create({
-    url: ipfsGateway + '/api/v0',
-    headers: {
-        authorization: 'Basic ' + authHeader
-    }
-});
+// const ipfs = create({
+//     url: ipfsGateway + '/api/v0',
+//     headers: {
+//         authorization: 'Basic ' + authHeader
+//     }
+// });
 
-// const ipfs = create({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
+const ipfs = create({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
 
 export default ipfs;

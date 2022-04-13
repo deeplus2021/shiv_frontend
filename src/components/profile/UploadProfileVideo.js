@@ -1,11 +1,10 @@
-import React, { useCallback, Component, useState } from "react"
-import { useDropzone } from "react-dropzone"
-import ipfs from "../../commons/ipfs"
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import './UploadProfileVideo.css';
-
-
+import React, { useCallback, Component, useState } from 'react'
+import { useDropzone } from 'react-dropzone'
+import ipfs from '../../commons/ipfs'
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
+import './UploadProfileVideo.css'
+import { CardMedia } from '@mui/material'
 
 function UploadProfileVideo(props) {
   const [ipfspath, setIpfspath] = useState(null)
@@ -18,11 +17,11 @@ function UploadProfileVideo(props) {
     props.setFieldValue(props.name, file.cid.toString())
     setLoading(false)
   }
-  const onDrop = useCallback(async (acceptedFile) => {
+  const onDrop = useCallback(async acceptedFile => {
     console.log(acceptedFile)
     setLoading(true)
     let ext = acceptedFile[0].path.split('.').pop().toUpperCase()
-    if(ext === "MP4" || ext ==="MP4") {
+    if (ext === 'MP4' || ext === 'MP4') {
       const reader = new window.FileReader()
       reader.readAsArrayBuffer(acceptedFile[0])
       reader.onloadend = () => {
@@ -32,20 +31,18 @@ function UploadProfileVideo(props) {
         //   setBuffer(buffer)
         addData(acceptedFile[0].path, buffer)
       }
-      
     } else {
       props.setFieldTouched(props.name, true)
-      console.log("Image must be JPEG or PNG")
+      console.log('Image must be JPEG or PNG')
       setLoading(false)
     }
-    
-  }, [])
+  }, [addData, props])
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,
   })
 
-  const files = acceptedFiles.map((file) => (
+  const files = acceptedFiles.map(file => (
     <li key={file.path}>
       {file.path}- {file.size}
       bytes
@@ -53,13 +50,12 @@ function UploadProfileVideo(props) {
   ))
 
   return (
-    <Container maxWidth="sm">
-    <section>
-    <Box sx={{ bgcolor: '#cfe8fc', height: '200px' }} >
-      <div {...getRootProps({ className: "jumbotron" })}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop image file, or click to select the image</p>
-      </div>
+    <Container>
+      <Box sx={{ bgcolor: '#cfe8fc', height: '200px' }}>
+        <div {...getRootProps({ className: 'jumbotron' })}>
+          <input {...getInputProps()} />
+          <p>Drag 'n' drop image file, or click to select the image</p>
+        </div>
       </Box>
       {files.length > 0 && (
         <React.Fragment>
@@ -72,7 +68,8 @@ function UploadProfileVideo(props) {
       {loading && (
         <React.Fragment>
           <div>
-            Please wait while image loads.....<br/>
+            Please wait while image loads.....
+            <br />
             <span className="spinner-border text-danger" role="status">
               <span className="sr-only">Loading...</span>
             </span>
@@ -81,16 +78,14 @@ function UploadProfileVideo(props) {
       )}
       {ipfspath && (
         <React.Fragment>
-          <img
+          <CardMedia
+            component="video"
+            controls 
             src={`https://gateway.ipfs.io/ipfs/${ipfspath}`}
-            alt={ipfspath}
-            width="300"
-            className="img-thumbnail"
           />
         </React.Fragment>
       )}
-    </section>
-    </Container> 
+    </Container>
   )
 }
 
