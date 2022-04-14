@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import {
   Container,
@@ -25,10 +25,27 @@ import Transfer from './Transfer'
 import Upgrade from './Upgrade'
 import AddProfile from './components/profile/AddProfile'
 import UploadProfileVideo from './components/profile/UploadProfileVideo'
-import ApiQuery from './components/profile/ApiQuery';
+import ApiQuery from './components/profile/ApiQuery'
+import { SubContext } from './commons/context/SubContext'
 
 function Main() {
-  const { apiState, apiError, keyringState } = useSubstrateState()
+  const [userId, setUserId] = useState(null)
+  const { apiState, apiError, keyringState, api, currentAccount } =
+    useSubstrateState()
+  const queryResHandler = result => {
+    result.isNone ? setUserId(null) : setUserId(result.toString())
+    console.log('result,', result.toString())
+  }
+  useEffect(() => {
+    async function myfn() {
+      const opts = [currentAccount.address]
+      console.log('currentaccount', currentAccount.address)
+      let data = api.query.templateModule.citizenId(...opts, queryResHandler)
+      console.log(data)
+    }
+
+    myfn()
+  }, [currentAccount, api])
 
   const loader = text => (
     <Dimmer active>
@@ -58,14 +75,16 @@ function Main() {
       "Loading accounts (please review any extension's authorization)"
     )
   }
+
   return (
+    <SubContext.Provider value={{ userId }}>
       <Routes>
         <Route path="/" element={<SubstrateTemplate />} />
-        {/* <Route path="/addprofile" */}
         <Route path="/addprofile" element={<AddProfile />} />
-        <Route path="/uploadvideo" element={<UploadProfileVideo/>} />
-        <Route path="/apiquery" element={<ApiQuery/>} />
+        <Route path="/uploadvideo" element={<UploadProfileVideo />} />
+        <Route path="/apiquery" element={<ApiQuery />} />
       </Routes>
+    </SubContext.Provider>
   )
 }
 
@@ -81,9 +100,9 @@ function SubstrateTemplate() {
   const contextRef = createRef()
   return (
     <React.Fragment>
-      <div  ref={contextRef} >
-      <Sticky context={contextRef}>
-          <AccountSelector/>
+      <div ref={contextRef}>
+        <Sticky context={contextRef}>
+          <AccountSelector />
         </Sticky>
         <Container>
           <Grid stackable columns="equal">

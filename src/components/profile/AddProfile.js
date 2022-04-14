@@ -81,6 +81,8 @@ function AddProfile(props) {
         console.log(`${section}.${name}: ${docs.join(' ')}`)
         setEventStatus(name)
         setSubmitting(false)
+      } else {
+        console.log(dispatchError.toString())
       }
     } else if (status.isFinalized) {
       setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
