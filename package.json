@@ -30,7 +30,7 @@
     "@polkadot/types": "^7.3.1",
     "@polkadot/ui-keyring": "^0.89.1",
     "@polkadot/ui-settings": "^0.89.1",
-    "@polkadot/util": "^8.3.1",
+    "@polkadot/util": "^9.0.1",
     "@polkadot/util-crypto": "^8.3.1",
     "axios": "^0.26.1",
     "formik": "^2.2.9",

@@ -1456,6 +1456,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.17.9":
+  version: 7.17.9
+  resolution: "@babel/runtime@npm:7.17.9"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 4d56bdb82890f386d5a57c40ef985a0ed7f0a78f789377a2d0c3e8826819e0f7f16ba0fe906d9b2241c5f7ca56630ef0653f5bb99f03771f7b87ff8af4bf5fe3
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.16.7, @babel/template@npm:^7.3.3":
   version: 7.16.7
   resolution: "@babel/template@npm:7.16.7"
@@ -2713,6 +2722,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@polkadot/util@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "@polkadot/util@npm:9.0.1"
+  dependencies:
+    "@babel/runtime": ^7.17.9
+    "@polkadot/x-bigint": 9.0.1
+    "@polkadot/x-global": 9.0.1
+    "@polkadot/x-textdecoder": 9.0.1
+    "@polkadot/x-textencoder": 9.0.1
+    "@types/bn.js": ^5.1.0
+    bn.js: ^5.2.0
+    ip-regex: ^4.3.0
+  checksum: 9f64657266fdea5a6effb7e241f1f8777472fbcd38cc7ee77f1bf339f4a5d016f0d1028945878d87711a87c83a72e528db8f858edc7d606e7ebdaf964e4b521a
+  languageName: node
+  linkType: hard
+
 "@polkadot/wasm-crypto-asmjs@npm:^4.5.1":
   version: 4.5.1
   resolution: "@polkadot/wasm-crypto-asmjs@npm:4.5.1"
@@ -2755,6 +2780,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@polkadot/x-bigint@npm:9.0.1":
+  version: 9.0.1
+  resolution: "@polkadot/x-bigint@npm:9.0.1"
+  dependencies:
+    "@babel/runtime": ^7.17.9
+    "@polkadot/x-global": 9.0.1
+  checksum: 36910d51159f100921bae24ebd92fa4152c9c7a9dcd0299d67c52fe0bba31ace737775dc2b4cf054b69a0a3a33e3a6c9f4ca661e6b3e2d43b5b5e9ce53ce2921
+  languageName: node
+  linkType: hard
+
 "@polkadot/x-fetch@npm:^8.3.1":
   version: 8.3.1
   resolution: "@polkadot/x-fetch@npm:8.3.1"
@@ -2773,6 +2808,15 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.16.7
   checksum: 5f50d10032dd295964f4303ec0163e0563bb383c1b9541ff5c48d19c6d0690e59cea04f35225c3ac0c283871cc9d197142c5d6f9609fe44793a64dd909a3e131
+  languageName: node
+  linkType: hard
+
+"@polkadot/x-global@npm:9.0.1":
+  version: 9.0.1
+  resolution: "@polkadot/x-global@npm:9.0.1"
+  dependencies:
+    "@babel/runtime": ^7.17.9
+  checksum: c5a884738285f3ed4d5ccbe8c6a82e7873e98b181fd6c291354de6ef4d9521ce64fb54ec264c643192a10ba348e0ec5aa8f1cbc8e4c625f0847a678d569b449e
   languageName: node
   linkType: hard
 
@@ -2796,6 +2840,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@polkadot/x-textdecoder@npm:9.0.1":
+  version: 9.0.1
+  resolution: "@polkadot/x-textdecoder@npm:9.0.1"
+  dependencies:
+    "@babel/runtime": ^7.17.9
+    "@polkadot/x-global": 9.0.1
+  checksum: 4ae2bbe245f34bdc0f8c8232801b2855d4769c50d2b591a350adae3db21db346a8c3b8a92c218b9a6501b933619c2c994debf209d4147b984012a8d5397775cc
+  languageName: node
+  linkType: hard
+
 "@polkadot/x-textencoder@npm:8.3.1":
   version: 8.3.1
   resolution: "@polkadot/x-textencoder@npm:8.3.1"
@@ -2803,6 +2857,16 @@ __metadata:
     "@babel/runtime": ^7.16.7
     "@polkadot/x-global": 8.3.1
   checksum: 7e162696f2f826aad3f5348868b552d1db3b8a0fc8a6955f3a528d85ebe7e295a01c2b45d8363806cd0d16139068b07716fff40f46cebe8756f4a2a46adb6cb5
+  languageName: node
+  linkType: hard
+
+"@polkadot/x-textencoder@npm:9.0.1":
+  version: 9.0.1
+  resolution: "@polkadot/x-textencoder@npm:9.0.1"
+  dependencies:
+    "@babel/runtime": ^7.17.9
+    "@polkadot/x-global": 9.0.1
+  checksum: 9f2126e09044a88f84102899035375adff8698a73bc2329d083fa283a8b5237ccc5f9da0d30cee6f9f9f92854bd5311a062f895fb19be8c96101706234ebda83
   languageName: node
   linkType: hard
 
@@ -3205,6 +3269,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 7f66f2c7b7b9303b3205a57184261974b114495736b77853af5b18d857c0b33e82ce7146911e86e87a87837de8acae28986716fd381ac7c301fd6e8d8b6c811f
+  languageName: node
+  linkType: hard
+
+"@types/bn.js@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@types/bn.js@npm:5.1.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 1dc1cbbd7a1e8bf3614752e9602f558762a901031f499f3055828b5e3e2bba16e5b88c27b3c4152ad795248fbe4086c731a5c4b0f29bb243f1875beeeabee59c
   languageName: node
   linkType: hard
 
@@ -14500,7 +14573,7 @@ resolve@^2.0.0-next.3:
     "@polkadot/types": ^7.3.1
     "@polkadot/ui-keyring": ^0.89.1
     "@polkadot/ui-settings": ^0.89.1
-    "@polkadot/util": ^8.3.1
+    "@polkadot/util": ^9.0.1
     "@polkadot/util-crypto": ^8.3.1
     axios: ^0.26.1
     eslint-config-prettier: ^8.3.0
