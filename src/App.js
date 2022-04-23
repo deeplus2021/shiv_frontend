@@ -27,6 +27,7 @@ import AddProfile from './components/profile/AddProfile'
 import UploadProfileVideo from './components/profile/UploadProfileVideo'
 import ProfileData from './components/profile/ProfileData'
 import { SubContext } from './commons/context/SubContext'
+import ProfileById from './components/profile/ProfileById'
 
 function Main() {
   const [userId, setUserId] = useState(null)
@@ -83,6 +84,7 @@ function Main() {
         <Route path="/addprofile" element={<AddProfile />} />
         <Route path="/uploadvideo" element={<UploadProfileVideo />} />
         <Route path="/profile" element={<ProfileData />} />
+        <Route path="/profile/:id" element={<ProfileById />} />
       </Routes>
     </SubContext.Provider>
   )
