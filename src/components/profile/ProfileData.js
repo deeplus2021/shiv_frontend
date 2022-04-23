@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useSubstrateState } from './../../substrate-lib'
-import { SubContext } from './../../commons/context/SubContext'
+import { useSubstrateState } from '../../substrate-lib'
+import { SubContext } from '../../commons/context/SubContext'
 import { u8aToString, hexToU8a } from '@polkadot/util'
-import ResponsiveAppBar from './../ResponsiveAppBar'
+import ResponsiveAppBar from '../ResponsiveAppBar'
 import axios from 'axios'
-import {IPFS_URL} from "./../../commons/config/configvar"
+import { IPFS_URL } from '../../commons/config/configvar'
 import { CardMedia } from '@mui/material'
+import Container from '@mui/material/Container'
+import longword from './LongWords.css'
 // import { useParams } from "react-router-dom";
 
-function ApiQuery() {
+function ProfileData() {
   const [status, setStatus] = useState(0)
 
   const { api } = useSubstrateState()
@@ -23,13 +25,13 @@ function ApiQuery() {
       if (result.isNone) {
         setStatus('None')
       } else {
-
-        const hash = u8aToString(hexToU8a(JSON.parse(result.toString()).profileHash))
+        const hash = u8aToString(
+          hexToU8a(JSON.parse(result.toString()).profileHash)
+        )
         setStatus(hash)
         const ipfsresult = await axios(`${IPFS_URL}${hash}`)
         console.log(ipfsresult.data)
         setProfileData(ipfsresult.data)
-
       }
 
       console.log('status', status)
@@ -44,6 +46,7 @@ function ApiQuery() {
         console.log(data)
       } else {
         setStatus('None')
+        setProfileData(null)
       }
     }
 
@@ -53,21 +56,32 @@ function ApiQuery() {
   return (
     <React.Fragment>
       {' '}
-      <ResponsiveAppBar /> userid: {userId} {status && <p>{status}</p>}{' '}
-      
+      <ResponsiveAppBar />
+      {/* userid: {userId} {status && <p>{status}</p>}{' '} */}
+      <br />
+      <br />
       {ipfsData && (
         <React.Fragment>
-          <p>Name: {ipfsData.name}</p>
-      {ipfsData.details}
-          <CardMedia
-            component="video"
-            controls 
-            src={`https://gateway.ipfs.io/ipfs/${ipfsData.video}`}
-          />
+          <Container maxWidth="xl">
+            <p>Name: {ipfsData.name}</p>
+            <div
+              className={`details ${longword.linebreaks} ${longword.wraplongworld}`}
+              dangerouslySetInnerHTML={{ __html: ipfsData.details }}
+            />
+
+            <br />
+          </Container>
+          <Container maxWidth="lg">
+            <CardMedia
+              component="video"
+              controls
+              src={`${IPFS_URL}${ipfsData.video}`}
+            />
+          </Container>
         </React.Fragment>
       )}
     </React.Fragment>
   )
 }
 
-export default ApiQuery
+export default ProfileData

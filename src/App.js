@@ -25,7 +25,7 @@ import Transfer from './Transfer'
 import Upgrade from './Upgrade'
 import AddProfile from './components/profile/AddProfile'
 import UploadProfileVideo from './components/profile/UploadProfileVideo'
-import ApiQuery from './components/profile/ApiQuery'
+import ProfileData from './components/profile/ProfileData'
 import { SubContext } from './commons/context/SubContext'
 
 function Main() {
@@ -82,7 +82,7 @@ function Main() {
         <Route path="/" element={<SubstrateTemplate />} />
         <Route path="/addprofile" element={<AddProfile />} />
         <Route path="/uploadvideo" element={<UploadProfileVideo />} />
-        <Route path="/apiquery" element={<ApiQuery />} />
+        <Route path="/profile" element={<ProfileData />} />
       </Routes>
     </SubContext.Provider>
   )
