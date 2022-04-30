@@ -8,6 +8,8 @@ import { CardMedia } from '@mui/material'
 import Container from '@mui/material/Container'
 import longword from './LongWords.css'
 import { useParams } from "react-router-dom";
+import PayProfileFees from './PayProfileFees'
+import PeriodName from './PeriodName'
 
 function ProfileById() {
   const [status, setStatus] = useState(0)
@@ -77,6 +79,8 @@ function ProfileById() {
               src={`${IPFS_URL}${ipfsData.video}`}
             />
           </Container>
+          <PayProfileFees/>
+          <PeriodName />
         </React.Fragment>
       )}
     </React.Fragment>
