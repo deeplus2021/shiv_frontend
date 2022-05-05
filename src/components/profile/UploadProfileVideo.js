@@ -71,7 +71,7 @@ function UploadProfileVideo(props) {
             Please wait while image loads.....
             <br />
             <span className="spinner-border text-danger" role="status">
-              <span className="sr-only">Loading...</span>
+              <span className="sr-only"></span>
             </span>
           </div>
         </React.Fragment>

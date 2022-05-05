@@ -11,6 +11,7 @@ import ResponsiveAppBar from './../ResponsiveAppBar'
 import UploadProfileVideo from './UploadProfileVideo'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+import "./AddProfile.css"
 
 function AddProfile(props) {
   const { api, currentAccount } = useSubstrateState()
@@ -46,9 +47,9 @@ function AddProfile(props) {
   ]
 
   // The transaction submission status
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState(null)
   const [unsubValue, setUnsub] = useState(null)
-  const [eventstatus, setEventStatus] = useState()
+  const [eventstatus, setEventStatus] = useState(null)
 
   // The currently stored value
   const [currentValue, setCurrentValue] = useState(0)
@@ -88,7 +89,7 @@ function AddProfile(props) {
       setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
       console.log('eventstatus', eventstatus)
 
-      navigate('/')
+      navigate('/profile')
 
       setSubmitting(false)
     }
@@ -179,8 +180,8 @@ function AddProfile(props) {
             validateForm,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <p>status: {status}</p>
-              <p>eventstatus: {eventstatus}</p>
+              {status && <p>Status: {status}</p>}
+              {eventstatus && <p>Error: {eventstatus}</p>}
               {errorThrow && <p>error: {errorThrow}</p>}
 
               <div className="form-group">
@@ -198,7 +199,7 @@ function AddProfile(props) {
                   <p className="alert alert-danger">{errors.details}</p>
                 )}
 
-                <Field id="details" name="details" className="form-control">
+                <Field id="details" name="details" className="form-control details">
                   {({ field }) => (
                     <ReactQuill
                       value={field.value}

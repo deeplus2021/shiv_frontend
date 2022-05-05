@@ -7,16 +7,18 @@ import { IPFS_URL } from '../../commons/config/configvar'
 import { CardMedia } from '@mui/material'
 import Container from '@mui/material/Container'
 import longword from './LongWords.css'
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 import PayProfileFees from './PayProfileFees'
 import PeriodName from './PeriodName'
+import './ProfileById.css'
+import Grid from '@mui/material/Grid'
 
 function ProfileById() {
   const [status, setStatus] = useState(0)
 
   const { api } = useSubstrateState()
   const [ipfsData, setProfileData] = useState(null)
-  const params = useParams();
+  const params = useParams()
 
   // console.log("id", params.id)
 
@@ -79,8 +81,16 @@ function ProfileById() {
               src={`${IPFS_URL}${ipfsData.video}`}
             />
           </Container>
-          <PayProfileFees/>
-          <PeriodName />
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <PeriodName />
+          </Grid>
+          <PayProfileFees />
         </React.Fragment>
       )}
     </React.Fragment>

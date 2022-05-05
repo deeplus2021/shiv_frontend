@@ -9,7 +9,7 @@ import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
 
 function PayProfileFees() {
   const { api, currentAccount } = useSubstrateState()
-  const params = useParams();
+  const params = useParams()
   const [count, setCount] = useState(0)
   // The transaction submission status
   const [status, setStatus] = useState('')
@@ -54,7 +54,7 @@ function PayProfileFees() {
       setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
       console.log('eventstatus', eventstatus)
 
-      navigate('/')
+      // navigate('/')
 
       setSubmitting(false)
     }
@@ -62,80 +62,78 @@ function PayProfileFees() {
 
   const txErrHandler = err =>
     setStatus(`😞 Transaction Failed: ${err.toString()}`)
-  return  <React.Fragment>
-    <Formik
-      initialValues={{
-      }}
-      validationSchema={Yup.object().shape({
-      })}
-      onSubmit={async (values, actions) => {
+  return (
+    <React.Fragment>
+      <Formik
+        initialValues={{}}
+        validationSchema={Yup.object().shape({})}
+        onSubmit={async (values, actions) => {
           try {
-          const fromAcct = await getFromAcct()
-          //   values.countvariable = count
-          //   const data = await nearvar.contract. ...
-          const opts = [params.id]
+            const fromAcct = await getFromAcct()
+            //   values.countvariable = count
+            //   const data = await nearvar.contract. ...
+            const opts = [params.id]
 
-          // const opts = ['Education', 'Bhadrak', 'whatapp']
+            // const opts = ['Education', 'Bhadrak', 'whatapp']
 
-          const txExecute = api.tx.templateModule.addProfileFund(...opts)
+            const txExecute = api.tx.templateModule.addProfileFund(...opts)
 
-          setStatus('Sending...')
+            setStatus('Sending...')
 
-          const unsub = await txExecute
-            .signAndSend(
-              ...fromAcct,
-              ({ status, events, dispatchError }) => {
+            const unsub = await txExecute
+              .signAndSend(...fromAcct, ({ status, events, dispatchError }) => {
                 txResHandler(
                   status,
                   events,
                   dispatchError,
                   actions.setSubmitting
                 )
-              }
-            )
-            .catch(txErrHandler)
+              })
+              .catch(txErrHandler)
 
-          setUnsub(() => unsub)
+            setUnsub(() => unsub)
 
-          // history.goBack()
-        } catch (e) {
-          console.error(e)
-          setErrorThrow(e.message)
-        }
-      }}
-    >
-      {({
-        handleSubmit,
-        handleBlur,
-        handleChange,
-        errors,
-        touched,
-        isValid,
-        isSubmitting,
-        values,
-        setFieldValue,
-        validateForm,
-      }) => (
-        <Form onSubmit={handleSubmit}>
-          <p>status: {status}</p>
-          <p>eventstatus: {eventstatus}</p>
-          {errorThrow && <p>error: {errorThrow}</p>}
-          <div className="text-center">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={isSubmitting}
-            >
-              Pay Profile Stake
-            </button>
-          </div>
-          <SubmittingWheel isSubmitting={isSubmitting} />
-          <FocusError />
-          <div>{/* <Balance accountPair={accountPair} /> */}</div>
-        </Form>
-      )}
-    </Formik>
-</React.Fragment>
+            // history.goBack()
+          } catch (e) {
+            console.error(e)
+            setErrorThrow(e.message)
+          }
+        }}
+      >
+        {({
+          handleSubmit,
+          handleBlur,
+          handleChange,
+          errors,
+          touched,
+          isValid,
+          isSubmitting,
+          values,
+          setFieldValue,
+          validateForm,
+        }) => (
+          <Form onSubmit={handleSubmit}>
+            {status && <p>Status: {status}</p>}
+            {eventstatus && <p>Error: {eventstatus}</p>}
+            {errorThrow && <p>error: {errorThrow}</p>}
+            <br/>
+            <div className="text-center">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={isSubmitting}
+              >
+                Pay Profile Stake
+              </button>
+            </div>
+            <SubmittingWheel isSubmitting={isSubmitting} />
+            <FocusError />
+            <div>{/* <Balance accountPair={accountPair} /> */}</div>
+          </Form>
+        )}
+      </Formik>
+    </React.Fragment>
+  )
 }
 
 export default PayProfileFees

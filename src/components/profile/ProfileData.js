@@ -7,7 +7,10 @@ import axios from 'axios'
 import { IPFS_URL } from '../../commons/config/configvar'
 import { CardMedia } from '@mui/material'
 import Container from '@mui/material/Container'
+import { Link } from 'react-router-dom'
 import longword from './LongWords.css'
+import './ProfileById.css'
+import Grid from '@mui/material/Grid'
 // import { useParams } from "react-router-dom";
 
 function ProfileData() {
@@ -63,6 +66,15 @@ function ProfileData() {
       {ipfsData && (
         <React.Fragment>
           <Container maxWidth="xl">
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Link to={`/profile/${userId}`}>Public Profile</Link>
+            </Grid>
             <p>Name: {ipfsData.name}</p>
             <div
               className={`details ${longword.linebreaks} ${longword.wraplongworld}`}
