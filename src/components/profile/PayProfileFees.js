@@ -12,7 +12,7 @@ function PayProfileFees() {
   const params = useParams()
   const [count, setCount] = useState(0)
   // The transaction submission status
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState(null)
   const [unsubValue, setUnsub] = useState(null)
   const [eventstatus, setEventStatus] = useState()
 
@@ -46,6 +46,7 @@ function PayProfileFees() {
 
         console.log(`${section}.${name}: ${docs.join(' ')}`)
         setEventStatus(name)
+        setStatus(null)
         setSubmitting(false)
       } else {
         console.log(dispatchError.toString())
@@ -113,11 +114,13 @@ function PayProfileFees() {
           validateForm,
         }) => (
           <Form onSubmit={handleSubmit}>
+
+           
+            <div className="text-center">
             {status && <p>Status: {status}</p>}
             {eventstatus && <p>Error: {eventstatus}</p>}
             {errorThrow && <p>error: {errorThrow}</p>}
             <br/>
-            <div className="text-center">
               <button
                 type="submit"
                 className="btn btn-primary"
@@ -129,6 +132,7 @@ function PayProfileFees() {
             <SubmittingWheel isSubmitting={isSubmitting} />
             <FocusError />
             <div>{/* <Balance accountPair={accountPair} /> */}</div>
+            <br/>
           </Form>
         )}
       </Formik>

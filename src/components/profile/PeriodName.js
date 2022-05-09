@@ -35,7 +35,8 @@ function PeriodName() {
   }, [api, status, params.id])
       return (
           <React.Fragment>
-             Period: {status}
+            <br/>
+             {status && <p>Period: {status}</p>}
            </React.Fragment>
        );
 }

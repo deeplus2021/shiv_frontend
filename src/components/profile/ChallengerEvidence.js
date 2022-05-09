@@ -8,12 +8,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
 import Container from '@mui/material/Container'
 import ResponsiveAppBar from './../ResponsiveAppBar'
-import UploadProfileVideo from './UploadProfileVideo'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import "./AddProfile.css"
 
-function AddProfile(props) {
+function ChallengerEvidence(props) {
   const { api, currentAccount } = useSubstrateState()
 
   let modules = {
@@ -56,6 +55,7 @@ function AddProfile(props) {
   const [formValue, setFormValue] = useState(0)
   const [errorThrow, setErrorThrow] = useState(false)
   let navigate = useNavigate()
+  const params = useParams()
 
   const getFromAcct = async () => {
     const {
@@ -90,7 +90,7 @@ function AddProfile(props) {
       setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
       console.log('eventstatus', eventstatus)
 
-      navigate('/profile')
+    //   navigate('/profile')
 
       setSubmitting(false)
     }
@@ -119,14 +119,10 @@ function AddProfile(props) {
       <Container maxWidth="xl">
         <Formik
           initialValues={{
-            name: '',
             details: '',
-            video: '',
           }}
           validationSchema={Yup.object().shape({
-            name: Yup.string().required('name is required'),
             details: Yup.string().required('Details is required'),
-            video: Yup.string().required('Video is required'),
           })}
           onSubmit={async (values, actions) => {
             try {
@@ -137,11 +133,11 @@ function AddProfile(props) {
               const fromAcct = await getFromAcct()
               //   values.countvariable = count
               //   const data = await nearvar.contract. ...
-              const opts = [file.cid.toString()]
+              const opts = [params.id, file.cid.toString()]
 
               // const opts = ['Education', 'Bhadrak', 'whatapp']
 
-              const txExecute = api.tx.templateModule.addCitizen(...opts)
+              const txExecute = api.tx.templateModule.challengeEvidence(...opts)
 
               setStatus('Sending...')
 
@@ -185,17 +181,10 @@ function AddProfile(props) {
               {eventstatus && <p>Error: {eventstatus}</p>}
               {errorThrow && <p>error: {errorThrow}</p>}
 
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                {touched.name && errors.name && (
-                  <p className="alert alert-danger">{errors.name}</p>
-                )}
-
-                <Field name="name" className="form-control" />
-              </div>
+             
 
               <div className="form-group">
-                <label htmlFor="details">Details</label>
+                <label htmlFor="details">Evidence</label>
                 {touched.details && errors.details && (
                   <p className="alert alert-danger">{errors.details}</p>
                 )}
@@ -211,16 +200,6 @@ function AddProfile(props) {
                     />
                   )}
                 </Field>
-              </div>
-              <div className="form-group">
-                <label htmlFor="Video">Video</label>
-                {touched.video && errors.video && (
-                  <p className="alert alert-danger">{errors.video}</p>
-                )}
-                <UploadProfileVideo
-                  name={'video'}
-                  setFieldValue={setFieldValue}
-                />
               </div>
               <div className="text-center">
                 <button
@@ -242,4 +221,4 @@ function AddProfile(props) {
   )
 }
 
-export default AddProfile
+export default ChallengerEvidence
