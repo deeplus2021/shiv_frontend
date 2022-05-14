@@ -29,8 +29,9 @@ import ProfileData from './components/profile/ProfileData'
 import { SubContext } from './commons/context/SubContext'
 import ProfileById from './components/profile/ProfileById'
 import PeriodName from './components/profile/PeriodName'
-import ChallengerEvidence from './components/profile/ChallengerEvidence';
+import ChallengerEvidence from './components/profile/ChallengerEvidence'
 import ChallengeEvidenceComment from './components/profile/ChallengeEvidenceComment'
+import ChallengeEvidenceView from './components/profile/ChallengeEvidenceView'
 
 function Main() {
   const [userId, setUserId] = useState(null)
@@ -88,9 +89,12 @@ function Main() {
         <Route path="/uploadvideo" element={<UploadProfileVideo />} />
         <Route path="/profile" element={<ProfileData />} />
         <Route path="/profile/:id" element={<ProfileById />} />
-        <Route path="/evidenceforchallenge/:id" element={<ChallengerEvidence/>} />
-        <Route path="/comment/:id" element={<ChallengeEvidenceComment/>} />
-        {/* <Route path="/period" element={<PeriodName />} /> */}
+        <Route
+          path="/evidenceforchallenge/:id"
+          element={<ChallengerEvidence />}
+        />
+        <Route path="/comment/:id" element={<ChallengeEvidenceComment />} />
+        <Route path="/challengeevidence/:id" element={<ChallengeEvidenceView />} />
       </Routes>
     </SubContext.Provider>
   )
