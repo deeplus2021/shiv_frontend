@@ -13,6 +13,8 @@ import PeriodName from './PeriodName'
 import './ProfileById.css'
 import Grid from '@mui/material/Grid'
 import { Link } from 'react-router-dom'
+import sanitizeHtml from 'sanitize-html-react'
+
 
 function ProfileById() {
   const [status, setStatus] = useState(0)
@@ -70,7 +72,7 @@ function ProfileById() {
             <p>Name: {ipfsData.name}</p>
             <div
               className={`details ${longword.linebreaks} ${longword.wraplongworld}`}
-              dangerouslySetInnerHTML={{ __html: ipfsData.details }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(ipfsData.details) }}
             />
 
             <br />

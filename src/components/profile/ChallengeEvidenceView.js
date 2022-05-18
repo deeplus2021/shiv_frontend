@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 // import AppPagination from './AppPagination'
 import config from '../../config'
 import rpcdata from '../../commons/rpcdata/rpcdata.js'
+import ChallengeEvidenceGet from './ChallengeEvidenceGet'
 
 function ChallengeEvidenceView() {
   const [status, setStatus] = useState(0)
@@ -28,13 +29,18 @@ function ChallengeEvidenceView() {
       // let methods = await api2.rpc.rpc.methods();
       // console.log(methods)
 
-      let result = await api2.rpc.shivarthu.challengerevidence(params.id, start, no_of_items)
+      let result = await api2.rpc.shivarthu.challengerevidence(
+        params.id,
+        start,
+        no_of_items
+      )
       console.log(result.toString())
-      console.log("id",params.id)
-      console.log("start", start)
+      console.log('id', params.id)
+      console.log('start', start)
       let chid = JSON.parse(result.toString())
       setChallengeIds(chid)
-      console.log("chid", chid[0])
+      console.log("chaollengeid:", challengeIds)
+      // console.log('chid', challengeIds)
 
       // const opts = [{"UniqueIdenfier1":[params.id,"challengeprofile"]}]
       // if (params.id !== null) {
@@ -45,7 +51,6 @@ function ChallengeEvidenceView() {
       // } else {
       //     setStatus(null)
       // }
-
     }
 
     myfn()
@@ -53,7 +58,12 @@ function ChallengeEvidenceView() {
   return (
     <React.Fragment>
       <br />
-      {challengeIds && challengeIds.map(item => <p key={item}>{item}</p>)}
+      {challengeIds &&
+        challengeIds.map(item => (
+          <div key={item}>      
+            <ChallengeEvidenceGet cid={item} />
+          </div>
+        ))}
       {/* <AppPagination setPage={setPage} pageCount={pageCount} /> */}
     </React.Fragment>
   )

@@ -32,6 +32,7 @@ import PeriodName from './components/profile/PeriodName'
 import ChallengerEvidence from './components/profile/ChallengerEvidence'
 import ChallengeEvidenceComment from './components/profile/ChallengeEvidenceComment'
 import ChallengeEvidenceView from './components/profile/ChallengeEvidenceView'
+import ChallengeEvidenceGet from './components/profile/ChallengeEvidenceGet'
 
 function Main() {
   const [userId, setUserId] = useState(null)

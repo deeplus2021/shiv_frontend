@@ -6531,7 +6531,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domelementtype@npm:1":
+"domelementtype@npm:1, domelementtype@npm:^1.3.1":
   version: 1.3.1
   resolution: "domelementtype@npm:1.3.1"
   checksum: 7893da40218ae2106ec6ffc146b17f203487a52f5228b032ea7aa470e41dfe03e1bd762d0ee0139e792195efda765434b04b43cddcf63207b098f6ae44b36ad6
@@ -6554,6 +6554,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"domhandler@npm:^2.3.0":
+  version: 2.4.2
+  resolution: "domhandler@npm:2.4.2"
+  dependencies:
+    domelementtype: 1
+  checksum: 49bd70c9c784f845cd047e1dfb3611bd10891c05719acfc93f01fc726a419ed09fbe0b69f9064392d556a63fffc5a02010856cedae9368f4817146d95a97011f
+  languageName: node
+  linkType: hard
+
 "domhandler@npm:^4.0.0, domhandler@npm:^4.2.0, domhandler@npm:^4.3.0":
   version: 4.3.0
   resolution: "domhandler@npm:4.3.0"
@@ -6563,7 +6572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^1.7.0":
+"domutils@npm:^1.5.1, domutils@npm:^1.7.0":
   version: 1.7.0
   resolution: "domutils@npm:1.7.0"
   dependencies:
@@ -6749,6 +6758,13 @@ __metadata:
   dependencies:
     ansi-colors: ^4.1.1
   checksum: 1c0911e14a6f8d26721c91e01db06092a5f7675159f0261d69c403396a385afd13dd76825e7678f66daffa930cfaa8d45f506fb35f818a2788463d022af1b884
+  languageName: node
+  linkType: hard
+
+"entities@npm:^1.1.1":
+  version: 1.1.2
+  resolution: "entities@npm:1.1.2"
+  checksum: d537b02799bdd4784ffd714d000597ed168727bddf4885da887c5a491d735739029a00794f1998abbf35f3f6aeda32ef5c15010dca1817d401903a501b6d3e05
   languageName: node
   linkType: hard
 
@@ -8515,6 +8531,20 @@ __metadata:
   peerDependencies:
     webpack: ^5.20.0
   checksum: f3d84d0df71fe2f5bac533cc74dce41ab058558cdcc6ff767d166a2abf1cf6fb8491d54d60ddbb34e95c00394e379ba52e0468e0284d1d0cc6a42987056e8219
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:^3.9.0":
+  version: 3.10.1
+  resolution: "htmlparser2@npm:3.10.1"
+  dependencies:
+    domelementtype: ^1.3.1
+    domhandler: ^2.3.0
+    domutils: ^1.5.1
+    entities: ^1.1.1
+    inherits: ^2.0.1
+    readable-stream: ^3.1.1
+  checksum: 6875f7dd875aa10be17d9b130e3738cd8ed4010b1f2edaf4442c82dfafe9d9336b155870dcc39f38843cbf7fef5e4fcfdf0c4c1fd4db3a1b91a1e0ee8f6c3475
   languageName: node
   linkType: hard
 
@@ -13347,6 +13377,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regexp-quote@npm:0.0.0":
+  version: 0.0.0
+  resolution: "regexp-quote@npm:0.0.0"
+  checksum: 78244ed6fa614f37c858e694b9e418e289e2c192251002c59e24f847d8186ed9293496bbb5f182687b10f15353996416edbcdc20b37932a2152e826b67f852a0
+  languageName: node
+  linkType: hard
+
 "regexp.prototype.flags@npm:^1.2.0, regexp.prototype.flags@npm:^1.3.1":
   version: 1.4.1
   resolution: "regexp.prototype.flags@npm:1.4.1"
@@ -13682,6 +13719,17 @@ resolve@^2.0.0-next.3:
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
+  languageName: node
+  linkType: hard
+
+"sanitize-html-react@npm:^1.13.0":
+  version: 1.13.0
+  resolution: "sanitize-html-react@npm:1.13.0"
+  dependencies:
+    htmlparser2: ^3.9.0
+    regexp-quote: 0.0.0
+    xtend: ^4.0.0
+  checksum: bbd6d1ace72668c19f33a7a708d1987214a9509f9324771db63659d05bb63da53679816d5e32be5bb261a36e77bbd81770fc52841af9e6a1799d96b35fcb3fd9
   languageName: node
   linkType: hard
 
@@ -14594,6 +14642,7 @@ resolve@^2.0.0-next.3:
     react-router-dom: ^6.2.2
     react-router-hash-link: ^2.4.3
     react-scripts: ^5.0.0
+    sanitize-html-react: ^1.13.0
     semantic-ui-css: "Semantic-Org/Semantic-UI-CSS#master"
     semantic-ui-react: ^2.1.1
     semistandard: ^16.0.0
@@ -16128,7 +16177,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"xtend@npm:^4.0.2":
+"xtend@npm:^4.0.0, xtend@npm:^4.0.2":
   version: 4.0.2
   resolution: "xtend@npm:4.0.2"
   checksum: ac5dfa738b21f6e7f0dd6e65e1b3155036d68104e67e5d5d1bde74892e327d7e5636a076f625599dc394330a731861e87343ff184b0047fef1360a7ec0a5a36a

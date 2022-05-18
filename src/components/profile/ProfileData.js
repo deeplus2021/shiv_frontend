@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import longword from './LongWords.css'
 import './ProfileById.css'
 import Grid from '@mui/material/Grid'
+import sanitizeHtml from 'sanitize-html-react'
 // import { useParams } from "react-router-dom";
 
 function ProfileData() {
@@ -78,7 +79,7 @@ function ProfileData() {
             <p>Name: {ipfsData.name}</p>
             <div
               className={`details ${longword.linebreaks} ${longword.wraplongworld}`}
-              dangerouslySetInnerHTML={{ __html: ipfsData.details }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(ipfsData.details) }}
             />
 
             <br />
