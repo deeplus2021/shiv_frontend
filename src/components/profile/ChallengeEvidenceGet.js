@@ -6,6 +6,8 @@ import { IPFS_URL } from '../../commons/config/configvar'
 import axios from 'axios'
 import longword from './LongWords.css'
 import sanitizeHtml from 'sanitize-html-react'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function ChallengeEvidenceGet(props) {
   const [status, setStatus] = useState(null)
@@ -44,7 +46,7 @@ function ChallengeEvidenceGet(props) {
     <React.Fragment>
       <br />
       {/* {status && <p>Period: {status}</p>} */}
-      {challengeData && (
+      { challengeData && (
         <React.Fragment>
         <div
           className={`details ${longword.linebreaks} ${longword.wraplongworld}`}
@@ -52,7 +54,7 @@ function ChallengeEvidenceGet(props) {
         />
         {authorAccountId && <div>AccountId: {authorAccountId}</div> }
         </React.Fragment>
-      )}
+      ) || <Skeleton count={3}/>}
     </React.Fragment>
   )
 }

@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom'
 import config from '../../config'
 import rpcdata from '../../commons/rpcdata/rpcdata.js'
 import ChallengeEvidenceGet from './ChallengeEvidenceGet'
-import ChallengePostComment from './ChallengePostComment';
+import ChallengePostComment from './ChallengePostComment'
+import Container from '@mui/material/Container'
 
 function ChallengeEvidenceView() {
   const [status, setStatus] = useState(0)
@@ -59,14 +60,16 @@ function ChallengeEvidenceView() {
   }, [api, status, params.id, page])
   return (
     <React.Fragment>
-      <br />
-      {challengeIds &&
-        challengeIds.map(item => (
-          <div key={item}>      
-            <ChallengeEvidenceGet cid={item} />
-            <ChallengePostComment cid={item} />
-          </div>
-        ))}
+      <Container maxWidth="xl">
+        <br />
+        {challengeIds &&
+          challengeIds.map(item => (
+            <div key={item}>
+              <ChallengeEvidenceGet cid={item} />
+              <ChallengePostComment cid={item} />
+            </div>
+          ))}
+      </Container>
       {/* <AppPagination setPage={setPage} pageCount={pageCount} /> */}
     </React.Fragment>
   )
