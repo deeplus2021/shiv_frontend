@@ -33,6 +33,7 @@ import ChallengerEvidence from './components/profile/ChallengerEvidence'
 import ChallengeEvidenceComment from './components/profile/ChallengeEvidenceComment'
 import ChallengeEvidenceView from './components/profile/ChallengeEvidenceView'
 import ChallengeEvidenceGet from './components/profile/ChallengeEvidenceGet'
+import ChallengePostComment from './components/profile/ChallengePostComment'
 
 function Main() {
   const [userId, setUserId] = useState(null)
@@ -96,6 +97,7 @@ function Main() {
         />
         <Route path="/comment/:id" element={<ChallengeEvidenceComment />} />
         <Route path="/challengeevidence/:id" element={<ChallengeEvidenceView />} />
+        <Route path="/getcomment" element={<ChallengePostComment/>} />
       </Routes>
     </SubContext.Provider>
   )

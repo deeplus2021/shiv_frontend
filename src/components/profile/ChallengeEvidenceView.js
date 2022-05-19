@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import config from '../../config'
 import rpcdata from '../../commons/rpcdata/rpcdata.js'
 import ChallengeEvidenceGet from './ChallengeEvidenceGet'
+import ChallengePostComment from './ChallengePostComment';
 
 function ChallengeEvidenceView() {
   const [status, setStatus] = useState(0)
@@ -39,7 +40,8 @@ function ChallengeEvidenceView() {
       console.log('start', start)
       let chid = JSON.parse(result.toString())
       setChallengeIds(chid)
-      console.log("chaollengeid:", challengeIds)
+      console.log(chid)
+      // console.log("chaollengeid:", challengeIds)
       // console.log('chid', challengeIds)
 
       // const opts = [{"UniqueIdenfier1":[params.id,"challengeprofile"]}]
@@ -62,6 +64,7 @@ function ChallengeEvidenceView() {
         challengeIds.map(item => (
           <div key={item}>      
             <ChallengeEvidenceGet cid={item} />
+            <ChallengePostComment cid={item} />
           </div>
         ))}
       {/* <AppPagination setPage={setPage} pageCount={pageCount} /> */}
