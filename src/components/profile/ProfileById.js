@@ -14,10 +14,14 @@ import './ProfileById.css'
 import Grid from '@mui/material/Grid'
 import { Link } from 'react-router-dom'
 import sanitizeHtml from 'sanitize-html-react'
+import ChallengerEvidence from './ChallengerEvidence'
+import ChallengeEvidenceView from './ChallengeEvidenceView';
 
 
 function ProfileById() {
   const [status, setStatus] = useState(0)
+
+  const [refresh, setRefresh] = useState(0)
 
   const { api } = useSubstrateState()
   const [ipfsData, setProfileData] = useState(null)
@@ -92,10 +96,10 @@ function ProfileById() {
             justifyContent="center"
           >
             <PeriodName />
-            <Link to={`/evidenceforchallenge/${params.id}`}>Challenge Profile Form</Link>
-            <Link to={`/challengeevidence/${params.id}`}>Challenge Profile Details</Link>
           </Grid>
           <PayProfileFees />
+          <ChallengerEvidence id={params.id} setRefresh={setRefresh} refresh={refresh}/>
+          <ChallengeEvidenceView id={params.id} refresh={refresh} />
         </React.Fragment>
       )}
     </React.Fragment>

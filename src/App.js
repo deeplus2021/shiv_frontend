@@ -91,12 +91,7 @@ function Main() {
         <Route path="/uploadvideo" element={<UploadProfileVideo />} />
         <Route path="/profile" element={<ProfileData />} />
         <Route path="/profile/:id" element={<ProfileById />} />
-        <Route
-          path="/evidenceforchallenge/:id"
-          element={<ChallengerEvidence />}
-        />
         <Route path="/comment/:id" element={<ChallengeEvidenceComment />} />
-        <Route path="/challengeevidence/:id" element={<ChallengeEvidenceView />} />
         <Route path="/getcomment" element={<ChallengePostComment/>} />
       </Routes>
     </SubContext.Provider>

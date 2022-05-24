@@ -55,7 +55,7 @@ function ChallengerEvidence(props) {
   const [formValue, setFormValue] = useState(0)
   const [errorThrow, setErrorThrow] = useState(false)
   let navigate = useNavigate()
-  const params = useParams()
+  // const params = useParams()
 
   const getFromAcct = async () => {
     const {
@@ -89,9 +89,9 @@ function ChallengerEvidence(props) {
     } else if (status.isFinalized) {
       setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
       console.log('eventstatus', eventstatus)
-
-    //   navigate('/profile')
-
+      const refresh = props.refresh
+      // navigate(`/profile/${props.id}`)
+      props.setRefresh(preCheck => !refresh);
       setSubmitting(false)
     }
   }
@@ -115,7 +115,6 @@ function ChallengerEvidence(props) {
 
   return (
     <React.Fragment>
-      <ResponsiveAppBar />
       <Container maxWidth="xl">
         <Formik
           initialValues={{
@@ -133,7 +132,7 @@ function ChallengerEvidence(props) {
               const fromAcct = await getFromAcct()
               //   values.countvariable = count
               //   const data = await nearvar.contract. ...
-              const opts = [params.id, file.cid.toString()]
+              const opts = [props.id, file.cid.toString()]
 
               // const opts = ['Education', 'Bhadrak', 'whatapp']
 
@@ -157,7 +156,6 @@ function ChallengerEvidence(props) {
 
               setUnsub(() => unsub)
 
-              // history.goBack()
             } catch (e) {
               console.error(e)
               setErrorThrow(e.message)

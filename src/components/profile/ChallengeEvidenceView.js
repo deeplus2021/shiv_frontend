@@ -9,13 +9,13 @@ import ChallengeEvidenceGet from './ChallengeEvidenceGet'
 import ChallengePostComment from './ChallengePostComment'
 import Container from '@mui/material/Container'
 
-function ChallengeEvidenceView() {
+function ChallengeEvidenceView(props) {
   const [status, setStatus] = useState(0)
   const [page, setPage] = useState(1)
   const [pageCount, setPageCount] = useState(10)
   const [challengeIds, setChallengeIds] = useState(null)
   const { api } = useSubstrateState()
-  const params = useParams()
+  // const params = useParams()
   useEffect(() => {
     async function myfn() {
       const no_of_items = 20
@@ -32,12 +32,12 @@ function ChallengeEvidenceView() {
       // console.log(methods)
 
       let result = await api2.rpc.shivarthu.challengerevidence(
-        params.id,
-        start,
+        props.id,
+        0,
         no_of_items
       )
       console.log(result.toString())
-      console.log('id', params.id)
+      console.log('id', props.id)
       console.log('start', start)
       let chid = JSON.parse(result.toString())
       setChallengeIds(chid)
@@ -57,7 +57,7 @@ function ChallengeEvidenceView() {
     }
 
     myfn()
-  }, [api, status, params.id, page])
+  }, [api, status, props, page])
   return (
     <React.Fragment>
       <Container maxWidth="xl">
