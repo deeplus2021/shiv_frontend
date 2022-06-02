@@ -57,7 +57,7 @@ function ChallengeEvidenceView(props) {
     }
 
     myfn()
-  }, [api, status, props, page])
+  }, [status, props, page])
   return (
     <React.Fragment>
       <Container maxWidth="xl">
