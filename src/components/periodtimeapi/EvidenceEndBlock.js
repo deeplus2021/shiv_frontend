@@ -16,9 +16,15 @@ function EvidenceEndBlock(props) {
       })
       let result = await api2.rpc.shivarthu.evidenceperiodendblock(props.id)
       setData(result.toString())
+      // console.log(result.toString())
     }
 
     myfn()
+    const interval = setInterval(() => {
+      myfn()
+    }, 10000)
+
+    return () => clearInterval(interval)
   }, [props])
 
   return (

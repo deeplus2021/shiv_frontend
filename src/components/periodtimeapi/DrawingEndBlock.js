@@ -19,6 +19,11 @@ function DrawingEndBlock(props) {
     }
 
     myfn()
+    const interval = setInterval(() => {
+      myfn()
+    }, 10000)
+
+    return () => clearInterval(interval)
   }, [props])
 
   return (

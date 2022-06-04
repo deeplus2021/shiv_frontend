@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
+import EvidenceEndBlock from '../periodtimeapi/EvidenceEndBlock'
 
 function ChallengeProfileFees(props) {
   const { api, currentAccount } = useSubstrateState()
@@ -110,13 +111,11 @@ function ChallengeProfileFees(props) {
           validateForm,
         }) => (
           <Form onSubmit={handleSubmit}>
-
-           
             <div className="text-center">
-            {status && <p>Status: {status}</p>}
-            {eventstatus && <p>Error: {eventstatus}</p>}
-            {errorThrow && <p>error: {errorThrow}</p>}
-            <br/>
+              {status && <p>Status: {status}</p>}
+              {eventstatus && <p>Error: {eventstatus}</p>}
+              {errorThrow && <p>error: {errorThrow}</p>}
+              <br />
               <button
                 type="submit"
                 className="btn btn-primary"
@@ -127,8 +126,10 @@ function ChallengeProfileFees(props) {
             </div>
             <SubmittingWheel isSubmitting={isSubmitting} />
             <FocusError />
-            <div>{/* <Balance accountPair={accountPair} /> */}</div>
-            <br/>
+            <div>
+              <EvidenceEndBlock id={props.id} />
+            </div>
+            <br />
           </Form>
         )}
       </Formik>
