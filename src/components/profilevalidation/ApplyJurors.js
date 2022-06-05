@@ -13,7 +13,6 @@ function ApplyJurors(props) {
   // The transaction submission status
   const [status, setStatus] = useState(null)
   const [unsubValue, setUnsub] = useState(null)
-  const [eventstatus, setEventStatus] = useState()
 
   // The currently stored value
   const [currentValue, setCurrentValue] = useState(0)
@@ -42,15 +41,13 @@ function ApplyJurors(props) {
         const { docs, name, section } = decoded
 
         console.log(`${section}.${name}: ${docs.join(' ')}`)
-        setEventStatus(name)
-        setStatus(null)
+        setStatus(name)
         setSubmitting(false)
       } else {
         console.log(dispatchError.toString())
       }
     } else if (status.isFinalized) {
       setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
-      console.log('eventstatus', eventstatus)
 
       // navigate('/')
 
@@ -116,7 +113,6 @@ function ApplyJurors(props) {
           <Form onSubmit={handleSubmit}>
             <div className="text-center">
               {status && <p>Status: {status}</p>}
-              {eventstatus && <p>Error: {eventstatus}</p>}
               {errorThrow && <p>error: {errorThrow}</p>}
               <br />
               <div className="form-group">

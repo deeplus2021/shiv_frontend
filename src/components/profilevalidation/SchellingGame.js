@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useSubstrateState } from '../../substrate-lib'
 import { useParams } from "react-router-dom"
 import ChallengeProfileFees from './ChallengeProfileFees'
+import ApplyJurors from './ApplyJurors';
+import ResponsiveAppBar from '../ResponsiveAppBar';
 
    
    
@@ -38,9 +40,12 @@ function SchellingGame() {
   let myview;
   if(status === "Evidence") {
       myview = <ChallengeProfileFees id={params.id}/>
+  }else if ( status=== "Staking") {
+    myview = <ApplyJurors id={params.id} />
   }
       return (
           <React.Fragment>
+            <ResponsiveAppBar />
             <br/>
              {status && <div><div>Period: {status}</div>
              {myview}</div>}
