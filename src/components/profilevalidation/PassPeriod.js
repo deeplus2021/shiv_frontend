@@ -122,7 +122,7 @@ function PassPeriod(props) {
                 className="btn btn-primary"
                 disabled={isSubmitting}
               >
-                Pay Challenge Profile Stake
+                Pass Period
               </button>
             </div>
             <SubmittingWheel isSubmitting={isSubmitting} />

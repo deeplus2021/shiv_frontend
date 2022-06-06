@@ -5,6 +5,8 @@ import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
+import StakingEndBlock from '../periodtimeapi/StakingEndBlock'
+import PassPeriod from './PassPeriod'
 
 function ApplyJurors(props) {
   const { api, currentAccount } = useSubstrateState()
@@ -138,6 +140,8 @@ function ApplyJurors(props) {
           </Form>
         )}
       </Formik>
+      <StakingEndBlock id={props.id} />
+      <PassPeriod id={props.id} />
     </React.Fragment>
   )
 }

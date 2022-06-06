@@ -5,6 +5,8 @@ import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
+import DrawingEndBlock from '../periodtimeapi/DrawingEndBlock'
+import PassPeriod from './PassPeriod'
 
 function DrawJurors(props) {
   const { api, currentAccount } = useSubstrateState()
@@ -142,6 +144,8 @@ function DrawJurors(props) {
           </Form>
         )}
       </Formik>
+      <DrawingEndBlock id={props.id} />
+      <PassPeriod id={props.id} />
     </React.Fragment>
   )
 }
