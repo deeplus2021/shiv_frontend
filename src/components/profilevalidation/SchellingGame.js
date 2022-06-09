@@ -5,6 +5,8 @@ import ChallengeProfileFees from './ChallengeProfileFees'
 import ApplyJurors from './ApplyJurors'
 import ResponsiveAppBar from '../ResponsiveAppBar'
 import DrawJurors from './DrawJurors'
+import CommitVote from './CommitVote';
+import RevealVote from './RevealVote'
 
 function SchellingGame() {
   const [status, setStatus] = useState(0)
@@ -39,6 +41,10 @@ function SchellingGame() {
     myview = <ApplyJurors id={params.id} />
   } else if (status === 'Drawing') {
     myview = <DrawJurors id={params.id} />
+  } else if (status === 'Commit') {
+    myview = <CommitVote id={params.id} />
+  } else if (status === 'Vote') {
+    myview = <RevealVote id={params.id} />
   }
   return (
     <React.Fragment>

@@ -5,6 +5,8 @@ import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
+import VoteEndBlock from '../periodtimeapi/VoteEndBlock'
+import PassPeriod from './PassPeriod'
 
 function RevealVote(props) {
   const { api, currentAccount } = useSubstrateState()
@@ -151,6 +153,8 @@ function RevealVote(props) {
           </Form>
         )}
       </Formik>
+      <VoteEndBlock id={props.id} />
+      <PassPeriod id={props.id} />
     </React.Fragment>
   )
 }

@@ -5,6 +5,9 @@ import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FocusError, SubmittingWheel } from './../../commons/FocusWheel'
+import {keccakAsU8a} from "@polkadot/util-crypto"
+import CommitEndBlock from '../periodtimeapi/CommitEndBlock'
+import PassPeriod from './PassPeriod'
 
 function CommitVote(props) {
   const { api, currentAccount } = useSubstrateState()
@@ -63,17 +66,21 @@ function CommitVote(props) {
     <React.Fragment>
       <Formik
         initialValues={{
-          voteCommit: '',
+          validationSchema: '',
         }}
         validationSchema={Yup.object().shape({
-            voteCommit: Yup.string().required('voteCommit is required'),
+            vote: Yup.string()
+            .matches(/^[10]+/, "Vote is invalid")
+            .required("Vote is required"),
         })}
         onSubmit={async (values, actions) => {
           try {
             const fromAcct = await getFromAcct()
             //   values.countvariable = count
+
+            const hash =  keccakAsU8a(values.vote)
             // Change voteCommit to [u8; 32]
-            const opts = [props.id, values.voteCommit]
+            const opts = [props.id, hash]
 
             // const opts = ['Education', 'Bhadrak', 'whatapp']
 
@@ -119,13 +126,31 @@ function CommitVote(props) {
               {eventstatus && <p>Error: {eventstatus}</p>}
               {errorThrow && <p>error: {errorThrow}</p>}
               <br />
+
               <div className="form-group">
-                <label htmlFor="voteCommit">voteCommit</label>
-                {touched.voteCommit && errors.voteCommit && (
-                  <p className="alert alert-danger">{errors.voteCommit}</p>
+                <label htmlFor="vote">Vote</label>
+                <p>Vote if already not voted.</p>
+                <p>
+                  Vote format, first character can be 0 or 1, your choice, then a unique
+                  string or salt.
+                  <br />1 =&gt; 👍 Evidence are valid <br />
+                  0 =&gt; 👎 Evidence are invalid, profile
+                  <br />
+                  For example, <br />
+                  0iilzmfeofopzblgycbuiahhkptp <br />
+                  1psiycigusjdkfoartn <br />
+                  0lbjvjgzqwigattqdqglzxxdepmwnsf <br />
+                </p>
+                
+                {touched.vote && errors.vote && (
+                  <p className="alert alert-danger">{errors.vote}</p>
                 )}
 
-                <Field name="voteCommit" className="form-control" />
+                <Field name="vote" className="form-control" />
+                <p className="alert alert-warning">
+                  Please copy the vote, your choice and salt in an unique place. You will need it to reveal the vote.
+                </p>
+                <p>Vote: {values.vote}</p>
               </div>
               <button
                 type="submit"
@@ -142,6 +167,8 @@ function CommitVote(props) {
           </Form>
         )}
       </Formik>
+      <CommitEndBlock id={props.id} />
+      <PassPeriod id={props.id} />
     </React.Fragment>
   )
 }
