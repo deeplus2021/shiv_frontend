@@ -106,6 +106,59 @@ const rpcdata = {
     },
 
   },
+  election: {
+    candidateids: {
+      description: "Candidate Ids",
+      params: [
+        {
+          name: 'departmentid',
+          type: 'u128'
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true,
+          isHistoric: true,
+        },
+      ],
+      type: 'Vec<AccountId>'
+    },
+
+    membersids: {
+      description: "Members Ids",
+      params: [
+        {
+          name: 'departmentid',
+          type: 'u128'
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true,
+          isHistoric: true,
+        },
+      ],
+      type: 'Vec<AccountId>'
+    },
+
+    runnersupids: {
+      description: "Runners Up Ids",
+      params: [
+        {
+          name: 'departmentid',
+          type: 'u128'
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true,
+          isHistoric: true,
+        },
+      ],
+      type: 'Vec<AccountId>'
+    },
+
+  }
 }
 
 export default rpcdata

@@ -34,7 +34,9 @@ import ChallengeEvidenceComment from './components/profile/ChallengeEvidenceComm
 import ChallengeEvidenceView from './components/profile/ChallengeEvidenceView'
 import ChallengeEvidenceGet from './components/profile/ChallengeEvidenceGet'
 import ChallengePostComment from './components/profile/ChallengePostComment'
-import SchellingGame from './components/profilevalidation/SchellingGame';
+import SchellingGame from './components/profilevalidation/SchellingGame'
+import SubmitCandidacy from './components/election/SubmitCandidacy'
+import Candidates from './components/election/Candidates'
 
 function Main() {
   const [userId, setUserId] = useState(null)
@@ -93,8 +95,10 @@ function Main() {
         <Route path="/profile" element={<ProfileData />} />
         <Route path="/profile/:id" element={<ProfileById />} />
         <Route path="/comment/:id" element={<ChallengeEvidenceComment />} />
-        <Route path="/getcomment" element={<ChallengePostComment/>} />
-        <Route path="/schellinggame/:id" element={<SchellingGame/>} />
+        <Route path="/getcomment" element={<ChallengePostComment />} />
+        <Route path="/schellinggame/:id" element={<SchellingGame />} />
+        <Route path="/election/submitcandidacy" element={<SubmitCandidacy />} />
+        <Route path="/election/candidates/:dpid" element={<Candidates />} />
       </Routes>
     </SubContext.Provider>
   )
