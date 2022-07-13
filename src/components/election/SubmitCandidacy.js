@@ -9,7 +9,7 @@ import ResponsiveAppBar from '../ResponsiveAppBar'
 
 function SubmitCandidacy() {
   const { api, currentAccount } = useSubstrateState()
-  const [status, setStatus] = useState(null)
+  const [statusdata, setStatusdata] = useState(null)
   const [count, setCount] = useState(0)
   const [errorThrow, setErrorThrow] = useState(false)
   const [unsubValue, setUnsub] = useState(null)
@@ -29,20 +29,19 @@ function SubmitCandidacy() {
   const txResHandler = (status, events, dispatchError, setSubmitting) => {
     setSubmitting(true)
     if (dispatchError) {
-      setStatus(null)
       if (dispatchError.isModule) {
         // for module errors, we have the section indexed, lookup
         const decoded = api.registry.findMetaError(dispatchError.asModule)
         const { docs, name, section } = decoded
 
         console.log(`${section}.${name}: ${docs.join(' ')}`)
-        setStatus(name)
+        setStatusdata(name)
         setSubmitting(false)
       } else {
         console.log(dispatchError.toString())
       }
     } else if (status.isFinalized) {
-      setStatus(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
+      setStatusdata(`😉 Finalized. Block hash: ${status.asFinalized.toString()}`)
 
       // navigate('/')
 
@@ -51,7 +50,7 @@ function SubmitCandidacy() {
   }
 
   const txErrHandler = err =>
-    setStatus(`😞 Transaction Failed: ${err.toString()}`)
+    setStatusdata(`😞 Transaction Failed: ${err.toString()}`)
 
   return (
     <React.Fragment>
@@ -72,13 +71,15 @@ function SubmitCandidacy() {
             const opts = [values.departmentid, values.candidatecount]
 
             // const opts = ['Education', 'Bhadrak', 'whatapp']
+            
+            setStatusdata('Sending...')
 
             const txExecute = api.tx.election.submitCandidacy(...opts)
 
-            setStatus('Sending...')
+           
 
             const unsub = await txExecute
-              .signAndSend(...fromAcct, ({ status, events, dispatchError }) => {
+              .signAndSend(...fromAcct, ({ status, events, dispatchError=null }) => {
                 txResHandler(
                   status,
                   events,
@@ -111,7 +112,7 @@ function SubmitCandidacy() {
         }) => (
           <Form onSubmit={handleSubmit}>
             <div className="text-center">
-              {status && <p>Status: {status}</p>}
+              {statusdata && <p>Status: {statusdata}</p>}
               {errorThrow && <p>error: {errorThrow}</p>}
               <br />
               <div className="form-group">

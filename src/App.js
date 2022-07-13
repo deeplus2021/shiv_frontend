@@ -37,6 +37,7 @@ import ChallengePostComment from './components/profile/ChallengePostComment'
 import SchellingGame from './components/profilevalidation/SchellingGame'
 import SubmitCandidacy from './components/election/SubmitCandidacy'
 import Candidates from './components/election/Candidates'
+import SubmitVotes from './components/election/SubmitVotes'
 
 function Main() {
   const [userId, setUserId] = useState(null)
@@ -99,6 +100,7 @@ function Main() {
         <Route path="/schellinggame/:id" element={<SchellingGame />} />
         <Route path="/election/submitcandidacy" element={<SubmitCandidacy />} />
         <Route path="/election/candidates/:dpid" element={<Candidates />} />
+        <Route path="/election/submitvotes/:dpid" element={<SubmitVotes />} />
       </Routes>
     </SubContext.Provider>
   )
