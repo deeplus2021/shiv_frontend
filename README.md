@@ -1,3 +1,7 @@
+# Tutotrial
+
+https://github.com/amiyatulu/shivarthu_frontend/tree/main/docs/Tutorial.md
+
 # Substrate Front End Template
 
 This template allows you to create a front-end application that connects to a
@@ -17,8 +21,8 @@ The codebase is installed using [git](https://git-scm.com/) and [yarn](https://y
 
 ```bash
 # Clone the repository
-git clone https://github.com/substrate-developer-hub/substrate-front-end-template.git
-cd substrate-front-end-template
+git clone https://github.com/amiyatulu/shivarthu_frontend.git
+cd shivarthu_frontend
 yarn install
 ```
 

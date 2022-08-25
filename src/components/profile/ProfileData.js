@@ -16,6 +16,7 @@ import sanitizeHtml from 'sanitize-html-react'
 
 function ProfileData() {
   const [status, setStatus] = useState(0)
+  const [loading, setLoading] = useState(true)
 
   const { api } = useSubstrateState()
   const [ipfsData, setProfileData] = useState(null)
@@ -35,6 +36,7 @@ function ProfileData() {
         setStatus(hash)
         const ipfsresult = await axios(`${IPFS_URL}${hash}`)
         console.log(ipfsresult.data)
+        setLoading(false)
         setProfileData(ipfsresult.data)
       }
 
@@ -57,6 +59,10 @@ function ProfileData() {
     myfn()
   }, [api, userId, status])
 
+  const Style = {
+    height: 600,
+  };
+
   return (
     <React.Fragment>
       {' '}
@@ -64,6 +70,7 @@ function ProfileData() {
       {/* userid: {userId} {status && <p>{status}</p>}{' '} */}
       <br />
       <br />
+      {loading && (<div>Loading... </div>)}
       {ipfsData && (
         <React.Fragment>
           <Container maxWidth="xl">
@@ -86,6 +93,7 @@ function ProfileData() {
           </Container>
           <Container maxWidth="lg">
             <CardMedia
+            style={Style}
               component="video"
               controls
               src={`${IPFS_URL}${ipfsData.video}`}

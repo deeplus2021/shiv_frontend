@@ -33,7 +33,7 @@ function UploadProfileVideo(props) {
       }
     } else {
       props.setFieldTouched(props.name, true)
-      console.log('Image must be JPEG or PNG')
+      console.log('Image must be mp4')
       setLoading(false)
     }
   }, [addData, props])
@@ -54,13 +54,13 @@ function UploadProfileVideo(props) {
       <Box sx={{ bgcolor: '#cfe8fc', height: '200px' }}>
         <div {...getRootProps({ className: 'jumbotron' })}>
           <input {...getInputProps()} />
-          <p>Drag 'n' drop image file, or click to select the image</p>
+          <p>Drag 'n' drop mp4 video file, or click to select the mp4 video</p>
         </div>
       </Box>
       {files.length > 0 && (
         <React.Fragment>
           <div>
-            <h4>Image</h4>
+            <h4>Video</h4>
             <ul>{files}</ul>
           </div>
         </React.Fragment>
@@ -68,7 +68,7 @@ function UploadProfileVideo(props) {
       {loading && (
         <React.Fragment>
           <div>
-            Please wait while image loads.....
+            Please wait while video loads.....
             <br />
             <span className="spinner-border text-danger" role="status">
               <span className="sr-only"></span>

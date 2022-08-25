@@ -62,7 +62,9 @@ function ProfileById() {
 
     myfn()
   }, [api, params, status])
-
+  const Style = {
+    height: 600,
+  };
   return (
     <React.Fragment>
       {' '}
@@ -84,6 +86,7 @@ function ProfileById() {
           <Container maxWidth="lg">
             <CardMedia
               component="video"
+              style={Style}
               controls
               src={`${IPFS_URL}${ipfsData.video}`}
             />
