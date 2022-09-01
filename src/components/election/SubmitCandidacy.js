@@ -137,7 +137,7 @@ function SubmitCandidacy() {
                 className="btn btn-primary"
                 disabled={isSubmitting}
               >
-                Apply Jurors
+                Submit Candidacy
               </button>
             </div>
             <SubmittingWheel isSubmitting={isSubmitting} />

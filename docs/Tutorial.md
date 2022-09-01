@@ -1,6 +1,9 @@
 ## Tutorial to test the app
 
-Note: Code is in active development, styling and features will change.  
+Note: Code is in active development, styling and features will change.
+
+
+## Profile Validation
 
 Distribute 1 Unit of tokens to charlie, dave, eve and ferdie
 
@@ -95,6 +98,48 @@ If you commited `1profilevalidation` than choice `1` is salt `profilevalidation`
 Then click `Get Jury Incentives` to get jury incentives for each account.
 
 ![Jury Incentives](jury_incentives.png)
+
+## Approval Voting
+
+To submit candidancy go to the following url:
+http://localhost:8000/#/election/submitcandidacy
+
+Set department id to 1, and go on increasing the count from 1 with submission of each candidacy. 
+
+![SubmitCandidacy](submitcandidancy.png)
+
+Submit about 4 accounts for candidancy.
+
+
+To view the candidancy list go to:
+
+http://localhost:8000/#/election/candidates/1
+
+![Candidancy](candidancy.png)
+
+
+Go to url to vote:
+http://localhost:8000/#/election/submitvotes/1
+
+You can select a maximum of 5 candidates
+
+![Vote](submit_vote.png)
+
+
+# Note
+
+The UI is not complete yet, it will be improved and undergo many changes when new features are added in second milestone. 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
