@@ -1,10 +1,10 @@
 import { Keyring } from '@polkadot/api';
 import {create} from 'ipfs-http-client';
-const seeds = process.env.REACT_APP_CRUST_SEED;
-const keyring = new Keyring();
-const pair = keyring.addFromUri(seeds);
-const sig = pair.sign(pair.address);
-const sigHex = '0x' + Buffer.from(sig).toString('hex');
+// const seeds = process.env.REACT_APP_CRUST_SEED;
+// const keyring = new Keyring();
+// const pair = keyring.addFromUri(seeds);
+// const sig = pair.sign(pair.address);
+// const sigHex = '0x' + Buffer.from(sig).toString('hex');
 // console.log(`sub-${pair.address}:${sigHex}`)
 
 // const authHeader = Buffer.from(`sub-${pair.address}:${sigHex}`).toString('base64');
