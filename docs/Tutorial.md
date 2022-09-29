@@ -14,6 +14,10 @@ mkdir .local
 docker compose up
 ```
 
+Substrate Node
+Development at
+ws://127.0.0.1:9944
+
 Frontend app:
 https://shivarthuapp.vercel.app/
 ## Profile Validation
