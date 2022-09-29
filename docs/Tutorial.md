@@ -14,7 +14,8 @@ mkdir .local
 docker compose up
 ```
 
-
+Frontend app:
+https://shivarthuapp.vercel.app/
 ## Profile Validation
 
 Distribute 1 Unit of tokens to charlie, dave, eve and ferdie
