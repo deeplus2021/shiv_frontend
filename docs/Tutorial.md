@@ -1,6 +1,18 @@
 ## Tutorial to test the app
 
-Note: Code is in active development, styling and features will change.
+Note: Code is in active development, styling and features will change.  
+
+Please run the shivarthu node in your computer https://github.com/amiyatulu/shivarthu 
+```bash
+cd shivarthu
+./target/release/node-template --dev --tmp
+```
+or 
+```bash
+cd shivarthu
+mkdir .local
+docker compose up
+```
 
 
 ## Profile Validation
@@ -13,7 +25,7 @@ Distribute 1 Unit of tokens to charlie, dave, eve and ferdie
 
 Go to addprofile link:  
 
-http://localhost:8000/#/addprofile
+https://shivarthuapp.vercel.app/#/addprofile
 
 Fill in the details and upload a small mp4 video. 
 
@@ -23,13 +35,13 @@ The submitter must say in English
 
 After submission page redirects to:
 
-http://localhost:8000/#/profile
+https://shivarthuapp.vercel.app/#/profile
 
 ![Profile](profile.png)
 
 Click on Public Profile
 
-http://localhost:8000/#/profile/0
+https://shivarthuapp.vercel.app/#/profile/0
 
 
 Pay the profile stake:
@@ -40,7 +52,7 @@ If the profile is legitimate, submit evidence on another account.
 
 Go to schelling game to pay challenge profile stake:
 
-http://localhost:8000/#/schellinggame/0
+https://shivarthuapp.vercel.app/#/schellinggame/0
 
 Click on `Pay challenge profile` to pay after the period for collecting evidence has expired.
 
@@ -102,7 +114,7 @@ Then click `Get Jury Incentives` to get jury incentives for each account.
 ## Approval Voting
 
 To submit candidancy go to the following url:
-http://localhost:8000/#/election/submitcandidacy
+https://shivarthuapp.vercel.app/#/election/submitcandidacy
 
 Set department id to 1, and go on increasing the count from 1 with submission of each candidacy. 
 
@@ -113,13 +125,13 @@ Submit about 4 accounts for candidancy.
 
 To view the candidancy list go to:
 
-http://localhost:8000/#/election/candidates/1
+https://shivarthuapp.vercel.app/#/election/candidates/1
 
 ![Candidancy](candidancy.png)
 
 
 Go to url to vote:
-http://localhost:8000/#/election/submitvotes/1
+https://shivarthuapp.vercel.app/#/election/submitvotes/1
 
 You can select a maximum of 5 candidates
 
