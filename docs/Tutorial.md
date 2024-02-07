@@ -2,7 +2,7 @@
 
 Note: Code is in active development, styling and features will change.  
 
-Please run the shivarthu node in your computer https://github.com/amiyatulu/shivarthu 
+Please run the shivarthu node in your computer https://github.com/biginfo2012/shiv_democracy 
 ```bash
 cd shivarthu
 ./target/release/node-template --dev --tmp
