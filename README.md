@@ -1,6 +1,6 @@
 # Tutotrial
 
-https://github.com/amiyatulu/shivarthu_frontend/tree/main/docs/Tutorial.md
+https://github.com/biginfo2012/shiv_frontend/tree/main/docs/Tutorial.md
 
 # Substrate Front End Template
 
